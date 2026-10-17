@@ -45,4 +45,30 @@ Bütün sistemi bir konsol uygulaması olarak dizayn etmelisiniz.(Scanner sını
 * Aynı şekilde kullanıcı kitap geri teslimde edebilir.
 * Sistemden bir kitap alındığında kitabı alan kullanıcıya bir fatura kesilmelidir. Kitabı geri iade ettiğinde kullanıcıya ücreti geri iade edilmelidir.
 * Kullanıcıların 5 kitap limiti olmalı ve bu kitap limitine ulaştıklarında daha fazla kitap alamamalılar.  
+
+### Sınıf ilişkileri
+
+```mermaid
+classDiagram
+    Person <|-- Author
+    Person <|-- Reader
+    Person <|-- Librarian
+    Reader <|-- Student
+    Reader <|-- Faculty
+    Book <|-- Journal
+    Book <|-- StudyBook
+    Book <|-- Magazine
+    Library *-- Book
+    Library o-- Reader
+    Library o-- Author
+    Reader *-- MemberRecord
+    Author "1" --> "*" Book : writes
+    Reader "*" --> "*" Book : borrows
+    Library *-- Invoice
+    Librarian --> Library : manages
+```
+
+`Library` işlemleri kitapları ve üyeleri `Map` yapılarında, kitap kategorilerini `Set` içinde tutar. `Main` sınıfı; kitap ekleme, arama, güncelleme ve silme, kategori/yazar bazında listeleme, üye kaydı ve ödünç/iade işlemlerini konsol menüsünden sunar. Ödünçte kitap bedeli tahsil edilir, iade sırasında aynı tutar iade edilir. Her üyenin aynı anda ödünç alabileceği kitap sayısı beştir.
+
+Projeyi IntelliJ IDEA'dan `Main` sınıfını çalıştırarak başlatabilirsiniz.
  
